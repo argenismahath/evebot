@@ -1,13 +1,16 @@
 from PIL import ImageGrab
 import time
-#posicion de la primera captura
-left = 1192
 
-    #inicia desde la primera anomalia
-top = 60
+values = {1: 0, 2: 72, 3: 144, 4: 216, 5:288}
 
-def takePhoto():
-    
+def takePhoto(number):
+        #posicion de la primera captura
+    left = 1192
+
+        #inicia desde la primera anomalia
+    top = 60
+
+    top= top+values[number]
 
     # Ancho y alto del área a capturar
     width = 100
@@ -41,18 +44,29 @@ def target():
     screenshot = ImageGrab.grab(bbox=(X, Y, X + width, Y + height))
 
     # Guardar la captura de pantalla en un archivo
-    nombre_archivo = f"captura{photoCounter}.png"
+    nombre_archivo = f"captura1.png"
     screenshot.save(nombre_archivo)
 
     print(f"Captura de pantalla guardada en: {nombre_archivo}")
 
-photoCounter=+1
-takePhoto()
-# target()
+def enemiesCheck():
+    X=130
+    Y=575
 
-time.sleep(10)
-top=top+72
-takePhoto()
+    width = 200
+    height = 55
+
+    screenshot = ImageGrab.grab(bbox=(X, Y, X + width, Y + height))
+    nombre_archivo = f"Enemies.png"
+    screenshot.save(nombre_archivo)
+    print(f"Captura de pantalla guardada en: {nombre_archivo}")
+
+# takePhoto()
+# # target()
+# enemiesCheck()
+# time.sleep(10)
+# top=top+72
+# takePhoto()
 
 
 #alto de los iconos de anomalias 
