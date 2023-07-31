@@ -8,6 +8,7 @@ import mause
 import time
 import comeToAnomalie
 import asyncio
+# import EnemyAlert
 import fight
 
 whileCounter = 1
@@ -40,16 +41,17 @@ def checkAnomaliesImage():
 # Corregir el bucle
 while not checkAnomaliesImage() and whileCounter < 6:
     whileCounter = whileCounter + 1
-    print("hace click")
 
 async def mi_funcion_asincronica():
     if checkAnomaliesImage():
         print(PhotoTaker.values[whileCounter])
         mause.moveMause(1192, PhotoTaker.values[whileCounter], datos["Salto"])
-        time.sleep(15)
-        comeToAnomalie.begingScanner()
+        time.sleep(10)
+        await comeToAnomalie.abegingScanner()
+        print("pass")
         await fight.startFight()
-        # comeToAnomalie.escanear()
+        time.sleep(30)
+        await fight.activar_comeToAnomalie()
         # EnemyAlert.periodic_enemy_check()
 
 async def main():

@@ -1,24 +1,35 @@
-import time
-import imageComparer
+import asyncio
 import PhotoTaker
+import imageComparer
 
-# Función asincrónica que se ejecutará periódicamente
-def escanear():
-    #toma captura del escaner
-    PhotoTaker.target()
-    similitud= imageComparer.cal_image()
-    print("Temporizador: Se ejecutó la función.")
+async def escanear():
+        # Toma captura del escáner
+        PhotoTaker.target()
 
-    # Definir el intervalo de tiempo (en segundos) para llamar nuevamente la función
-    intervalo = 5
+        # Se encarga de dar click y obtiene la similitud
+        similitud = imageComparer.cal_image()
+        print("Temporizador: Se ejecutó la función.")
 
-    # Esperar durante el intervalo de tiempo antes de llamar a la función nuevamente
-    time.sleep(intervalo)
-    print(similitud)
-    return similitud
-   
-def begingScanner():
+        # Definir el intervalo de tiempo (en segundos) para llamar nuevamente la función
+        intervalo = 5
+
+        # Esperar durante el intervalo de tiempo antes de llamar a la función nuevamente
+        await asyncio.sleep(intervalo)
+        return similitud
+
+async def abegingScanner():
     for _ in range(10):
-        similitud= escanear()
+        similitud = await escanear()
+        print(similitud)
+        print("similitud*********")
+
         if similitud:
-            break
+            return similitud
+
+async def abegingScannerFight():
+    similitud = await escanear()
+    print(similitud)
+    print("similitud*********")
+
+    if similitud:
+        return similitud

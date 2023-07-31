@@ -31,8 +31,6 @@ def takePhoto(number):
 photoCounter=0
 
 def target():
-
-
     #posicion de la  captura de target
     X,Y=820, 455
         
@@ -67,7 +65,6 @@ def enemiesCheck():
 # time.sleep(10)
 # top=top+72
 # takePhoto()
-
 
 #alto de los iconos de anomalias 
 # X=1256, Y=269

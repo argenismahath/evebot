@@ -20,7 +20,7 @@ def moveMause(left, top, distance):
     # pyautogui.click(nueva_x-180, nueva_y+100)
 
     #impulsar
-    pyautogui.dragTo(nueva_x-350, nueva_y+100, duration=1.0)
+    pyautogui.dragTo(nueva_x-320, nueva_y+100, duration=1.0)
 
     #320 = 19
     #325 = 22km
