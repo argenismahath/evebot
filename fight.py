@@ -2,12 +2,14 @@ import asyncio
 import keyboard
 import time
 import comeToAnomalie
+import weaponsComparer
 
 Shield = False
-
+Weapons=False
 # Resto del código...
 
 async def powerShield():
+    global Shield
     keyboard.press("1")
     time.sleep(0.1)
     keyboard.release("1")
@@ -15,6 +17,7 @@ async def powerShield():
     keyboard.press("2")
     time.sleep(0.1)
     keyboard.release("2")
+    Shield= not Shield
 
 async def PowerWeapons():
     keyboard.press("a")
@@ -38,10 +41,29 @@ async def powerShieldReparer():
     keyboard.release("3")
 
 async def startFight():
-    if not Shield:
+    global Weapons
+
+    poweWeapons= await weaponsComparer.main()
+    #si el escudo esta apaga
+    #las armas estan apagadas
+    #y visualemente esta las armas apaagadas, se encenderan las armas
+    if Shield==False and Weapons==False and poweWeapons==False:
+        await PowerWeapons()
+        Weapons=True
+
+    #si el escudo esta apagado se encenderá
+    if Shield==False:
         await powerShield()
+    
+    #si visualmente las armas estan apaagadas
+    #pero si en las variables esta encendido junto al escudo
+    #se encenderan las armas
+    if poweWeapons==False and Weapons and Shield:
+        await PowerWeapons()
+        Weapons=True
+
+
     time.sleep(.9)
-    await PowerWeapons()
 
 async def activar_comeToAnomalie():
     while True:
@@ -52,7 +74,7 @@ async def activar_comeToAnomalie():
         print("********************")
 
         if next:
-            startFight()
+            await startFight()
             print("activar armas")
         await asyncio.sleep(10)
 

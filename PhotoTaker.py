@@ -47,6 +47,23 @@ def target():
 
     print(f"Captura de pantalla guardada en: {nombre_archivo}")
 
+def weapons():
+    #posicion de la  captura de target
+    X,Y=888, 672
+        
+    # Ancho y alto del área a capturar
+    width = 73
+    height = 67
+
+    # Captura de pantalla del área específica
+    screenshot = ImageGrab.grab(bbox=(X, Y, X + width, Y + height))
+
+    # Guardar la captura de pantalla en un archivo
+    nombre_archivo = f"weapons.png"
+    screenshot.save(nombre_archivo)
+
+    print(f"Captura de pantalla guardada en: {nombre_archivo}")
+
 def enemiesCheck():
     X=130
     Y=575
@@ -65,7 +82,7 @@ def enemiesCheck():
 # time.sleep(10)
 # top=top+72
 # takePhoto()
-
+weapons()
 #alto de los iconos de anomalias 
 # X=1256, Y=269
 # Posición del cursor: X=1266, Y=339
