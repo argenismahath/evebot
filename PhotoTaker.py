@@ -1,11 +1,11 @@
 from PIL import ImageGrab
 import time
 
-values = {1: 0, 2: 72, 3: 144, 4: 216, 5:288}
+values = {1: 0, 2: 72, 3: 144, 4: 216, 5:288, 6:360}
 
 def takePhoto(number):
         #posicion de la primera captura
-    left = 1192
+    left = 1190
 
         #inicia desde la primera anomalia
     top = 60
@@ -13,7 +13,7 @@ def takePhoto(number):
     top= top+values[number]
 
     # Ancho y alto del área a capturar
-    width = 100
+    width = 140
     height = 70
 
     # Captura de pantalla del área específica
@@ -85,11 +85,14 @@ def weapons():
 
 def Capacitor():
     #posicion de la  captura de target
-    X,Y=570, 680
+    #Shiel damage data
+    # X,Y=570, 680
+    X,Y=570, 695
+
         
     # Ancho y alto del área a capturar
-    width = 60
-    height = 50
+    width = 50
+    height = 30
 
     # Captura de pantalla del área específica
     screenshot = ImageGrab.grab(bbox=(X, Y, X + width, Y + height))
@@ -112,6 +115,26 @@ def enemiesCheck():
     screenshot.save(nombre_archivo)
     print(f"Captura de pantalla guardada en: {nombre_archivo}")
 
+def ShepCheck():
+    #posicion de la  captura de target
+    #Shiel damage data
+    # X,Y=570, 680
+    X,Y=985, 15
+
+        
+    # Ancho y alto del área a capturar
+    width = 80
+    height = 80
+
+    # Captura de pantalla del área específica
+    screenshot = ImageGrab.grab(bbox=(X, Y, X + width, Y + height))
+
+    # Guardar la captura de pantalla en un archivo
+    nombre_archivo = f"ship/shipVoid.png"
+    screenshot.save(nombre_archivo)
+
+    print(f"Captura de pantalla guardada en: {nombre_archivo}")
+ShepCheck()
 # takePhoto()
 # # target()
 # enemiesCheck()
@@ -119,7 +142,7 @@ def enemiesCheck():
 # top=top+72
 # takePhoto()
 # weapons()
-Capacitor()
+# Capacitor()
 #alto de los iconos de anomalias 
 # X=1256, Y=269
 # Posición del cursor: X=1266, Y=339

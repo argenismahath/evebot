@@ -12,6 +12,7 @@ import asyncio
 import fight
 
 whileCounter = 1
+closeWhileII=False
 
 pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
@@ -25,7 +26,10 @@ ruta_archivo = "data/json.json"
 with open(ruta_archivo, "r") as archivo:
     datos = json.load(archivo)
 
-def checkAnomaliesImage():
+async def checkAnomaliesImage():
+    global whileCounter
+
+    print(whileCounter)
     takePhotografie(whileCounter)
     time.sleep(2.5)
     img = Image.open("captura.png")
@@ -36,16 +40,31 @@ def checkAnomaliesImage():
     isAnomalie = TextProcessing.textProcessing(resultado)
 
     # print(isAnomalie)
+    if isAnomalie:
+        await mi_funcion_asincronica(whileCounter)
+        whileCounter=6
+
+    else:
+        whileCounter = whileCounter + 1
+    
     return isAnomalie
 
-# Corregir el bucle
-while not checkAnomaliesImage() and whileCounter < 6:
-    whileCounter = whileCounter + 1
+# # Corregir el bucle
+# while not checkAnomaliesImage() and whileCounter < 6:
+#     whileCounter = whileCounter + 1
 
-async def mi_funcion_asincronica():
-    if checkAnomaliesImage():
-        print(PhotoTaker.values[whileCounter])
-        mause.moveMause(1192, PhotoTaker.values[whileCounter], datos["Salto"])
+async def main():
+    global whileCounter
+    # Corregir el bucle
+    while whileCounter < 6:
+        await checkAnomaliesImage() 
+        print("hace click")
+
+    # Llamar a la función asincrónica con await
+
+async def mi_funcion_asincronica(num):
+        # print(PhotoTaker.values[whileCounter])
+        mause.moveMause(1192, PhotoTaker.values[num], datos["Salto"])
         time.sleep(10)
         await comeToAnomalie.abegingScanner()
         print("pass")
@@ -54,16 +73,7 @@ async def mi_funcion_asincronica():
         await fight.activar_comeToAnomalie()
         # EnemyAlert.periodic_enemy_check()
 
-async def main():
-    whileCounter = 1
 
-    # Corregir el bucle
-    while not checkAnomaliesImage() and whileCounter < 6:
-        whileCounter = whileCounter + 1
-        print("hace click")
-
-    # Llamar a la función asincrónica con await
-    await mi_funcion_asincronica()
 
 # Llamar a la función principal asincrónica
 asyncio.run(main())

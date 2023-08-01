@@ -4,10 +4,11 @@ import time
 import comeToAnomalie
 import weaponsComparer
 import PhotoTaker
+import capacitorProsessing
 
 Shield = False
 Weapons=False
-# Resto del código...
+ShieldReparer=False
 
 async def powerShield():
     global Shield
@@ -30,21 +31,24 @@ async def PowerWeapons():
 
 async def powerredific():
     keyboard.press("r")
-    time.sleep(0.5)
+    time.sleep(0.1)
     keyboard.release("r")
     keyboard.press("f")
-    time.sleep(0.5)
+    time.sleep(0.1)
     keyboard.release("f")
 
 async def powerShieldReparer():
     keyboard.press("3")
-    time.sleep(0.5)
+    time.sleep(0.1)
     keyboard.release("3")
 
 async def startFight():
     global Weapons
 
     PhotoTaker.weapons()
+
+   
+
     poweWeapons= await weaponsComparer.main()
     #si el escudo esta apaga
     #las armas estan apagadas
@@ -64,20 +68,41 @@ async def startFight():
         await PowerWeapons()
         Weapons=True
 
-
     time.sleep(.9)
+    await powerredific()
 
 async def activar_comeToAnomalie():
+    global ShieldReparer
+
     while True:
+
+        shieldDamage= await capacitorProsessing.procesar_imagen()
+        
+        if shieldDamage is not None:
+            shieldDamage=shieldDamage
+        else:
+            shieldDamage=100
+        
+        if ShieldReparer and shieldDamage<70:
+            ShieldReparer=True 
+        elif shieldDamage<70 and ShieldReparer == False:
+            ShieldReparer=True
+            await powerShieldReparer()
+        elif shieldDamage>80 and ShieldReparer:
+            ShieldReparer=False
+            await powerShieldReparer()
+
         # Usar await para obtener el valor real de la similitud
         next= await comeToAnomalie.abegingScannerFight()
         print("********************")
         print(next)
+        print(ShieldReparer)
+        print(shieldDamage)
         print("********************")
 
         if next:
             await startFight()
             print("activar armas")
-        await asyncio.sleep(10)
+        await asyncio.sleep(6)
 
     

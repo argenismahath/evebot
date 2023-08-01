@@ -20,7 +20,7 @@ def moveMause(left, top, distance):
     # pyautogui.click(nueva_x-180, nueva_y+100)
 
     #impulsar
-    pyautogui.dragTo(nueva_x-320, nueva_y+100, duration=1.0)
+    pyautogui.dragTo(nueva_x-350, nueva_y+100, duration=1.0)
 
     #320 = 19
     #325 = 22km
@@ -57,8 +57,8 @@ def dock():
     pyautogui.click(1193, 29)
 
     #mover el mause y dar click a la opcion de base
-    pyautogui.moveTo(1219, 525, duration=.5)
-    pyautogui.click(1219, 525)
+    pyautogui.moveTo(1236, 141, duration=.5)
+    pyautogui.click(1236, 141)
 
     time.sleep(2)
     #mover y dar click en estacion (citadel) 
@@ -75,3 +75,4 @@ def unDock():
     #mover el mause y desacoplar
     pyautogui.moveTo(1236, 259)
     pyautogui.click()
+
