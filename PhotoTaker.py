@@ -47,6 +47,25 @@ def target():
 
     print(f"Captura de pantalla guardada en: {nombre_archivo}")
 
+def trainerWeapons():
+    global photoCounter
+    photoCounter=photoCounter+1
+    #posicion de la  captura de target
+    X,Y=888, 672
+        
+    # Ancho y alto del área a capturar
+    width = 73
+    height = 67
+
+    # Captura de pantalla del área específica
+    screenshot = ImageGrab.grab(bbox=(X, Y, X + width, Y + height))
+
+    # Guardar la captura de pantalla en un archivo
+    nombre_archivo = f"WeaponOn/weapons{photoCounter}.png"
+    screenshot.save(nombre_archivo)
+
+    print(f"Captura de pantalla guardada en: {nombre_archivo}")
+
 def weapons():
     #posicion de la  captura de target
     X,Y=888, 672
@@ -60,6 +79,23 @@ def weapons():
 
     # Guardar la captura de pantalla en un archivo
     nombre_archivo = f"weapons.png"
+    screenshot.save(nombre_archivo)
+
+    print(f"Captura de pantalla guardada en: {nombre_archivo}")
+
+def Capacitor():
+    #posicion de la  captura de target
+    X,Y=570, 680
+        
+    # Ancho y alto del área a capturar
+    width = 60
+    height = 50
+
+    # Captura de pantalla del área específica
+    screenshot = ImageGrab.grab(bbox=(X, Y, X + width, Y + height))
+
+    # Guardar la captura de pantalla en un archivo
+    nombre_archivo = f"Capacitor/Capacitor.png"
     screenshot.save(nombre_archivo)
 
     print(f"Captura de pantalla guardada en: {nombre_archivo}")
@@ -82,7 +118,8 @@ def enemiesCheck():
 # time.sleep(10)
 # top=top+72
 # takePhoto()
-weapons()
+# weapons()
+Capacitor()
 #alto de los iconos de anomalias 
 # X=1256, Y=269
 # Posición del cursor: X=1266, Y=339

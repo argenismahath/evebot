@@ -3,6 +3,7 @@ import keyboard
 import time
 import comeToAnomalie
 import weaponsComparer
+import PhotoTaker
 
 Shield = False
 Weapons=False
@@ -43,6 +44,7 @@ async def powerShieldReparer():
 async def startFight():
     global Weapons
 
+    PhotoTaker.weapons()
     poweWeapons= await weaponsComparer.main()
     #si el escudo esta apaga
     #las armas estan apagadas

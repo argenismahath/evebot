@@ -54,15 +54,6 @@ imagenesOff = [
     "WeaponOff/weapons13.png",
     "WeaponOff/weapons14.png",
     "WeaponOff/weapons15.png",
-    "WeaponOff/weapons16.png",
-    "WeaponOff/weapons17.png",
-    "WeaponOff/weapons18.png",
-    "WeaponOff/weapons19.png",
-    "WeaponOff/weapons20.png",
-    "WeaponOff/weapons21.png",
-    "WeaponOff/weapons23.png",
-    "WeaponOff/weapons24.png",
-    "WeaponOff/weapons25.png",
 ]
 
 imagenesOn = [
@@ -82,16 +73,6 @@ imagenesOn = [
     "WeaponOn/weapons13.png",
     "WeaponOn/weapons14.png",
     "WeaponOn/weapons15.png",
-    "WeaponOn/weapons16.png",
-    "WeaponOn/weapons17.png",
-    "WeaponOn/weapons18.png",
-    "WeaponOn/weapons19.png",
-    "WeaponOn/weapons20.png",
-    "WeaponOn/weapons21.png",
-    "WeaponOn/weapons23.png",
-    "WeaponOn/weapons24.png",
-    "WeaponOn/weapons25.png",
-
 ]
 
 async def main():
@@ -101,5 +82,6 @@ async def main():
         return True
     else:
         return False
+    
 # Ejecutar el código asincrónico
 asyncio.run(main())
