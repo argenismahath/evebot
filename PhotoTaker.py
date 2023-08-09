@@ -1,5 +1,6 @@
 from PIL import ImageGrab
 import time
+import Fondo
 
 values = {1: 0, 2: 72, 3: 144, 4: 216, 5:288, 6:360}
 
@@ -9,7 +10,7 @@ def takePhoto(number):
 
         #inicia desde la primera anomalia
     top = 60
-
+    
     top= top+values[number]
 
     # Ancho y alto del área a capturar
@@ -104,18 +105,32 @@ def Capacitor():
     print(f"Captura de pantalla guardada en: {nombre_archivo}")
 
 def enemiesCheck():
-    X=130
-    Y=575
+    #Rojo 1
+    # X=26
+    # Y=410
 
-    width = 200
-    height = 55
+    X=45
+    Y=390
+
+    #gris
+    # X=205
+    # Y=410
+
+    
+    # X=145
+    # Y=490
+    width = 210
+    height = 70
+
+    # width = 45
+    # height = 40
 
     screenshot = ImageGrab.grab(bbox=(X, Y, X + width, Y + height))
     nombre_archivo = f"Enemies.png"
     screenshot.save(nombre_archivo)
     print(f"Captura de pantalla guardada en: {nombre_archivo}")
 
-def ShepCheck():
+def ShipCheck():
     #posicion de la  captura de target
     #Shiel damage data
     # X,Y=570, 680
@@ -134,13 +149,15 @@ def ShepCheck():
     screenshot.save(nombre_archivo)
 
     print(f"Captura de pantalla guardada en: {nombre_archivo}")
-ShepCheck()
 # takePhoto()
 # # target()
-# enemiesCheck()
-# time.sleep(10)
+for _ in range(10):
+    enemiesCheck()
+    Fondo.change_BackGround()
+    time.sleep(10)
 # top=top+72
 # takePhoto()
+# ShipCheck()
 # weapons()
 # Capacitor()
 #alto de los iconos de anomalias 

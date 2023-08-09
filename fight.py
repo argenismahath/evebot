@@ -5,6 +5,9 @@ import comeToAnomalie
 import weaponsComparer
 import PhotoTaker
 import capacitorProsessing
+import FinishFightReport
+import mause
+import EnemyAlert
 
 Shield = False
 Weapons=False
@@ -47,9 +50,9 @@ async def startFight():
 
     PhotoTaker.weapons()
 
+    poweWeapons= await weaponsComparer.main()
    
 
-    poweWeapons= await weaponsComparer.main()
     #si el escudo esta apaga
     #las armas estan apagadas
     #y visualemente esta las armas apaagadas, se encenderan las armas
@@ -61,20 +64,37 @@ async def startFight():
     if Shield==False:
         await powerShield()
     
-    #si visualmente las armas estan apaagadas
-    #pero si en las variables esta encendido junto al escudo
-    #se encenderan las armas
+    #revisar la imagen tomada
+    probabilitie= await FinishFightReport.main()
+
+    if probabilitie:
+        mause.dock()
+        # break
+
+        #si visualmente las armas estan apaagadas
+        #pero si en las variables esta encendido junto al escudo
+        #se encenderan las armas
     if poweWeapons==False and Weapons and Shield:
         await PowerWeapons()
-        Weapons=True
-
+        Weapons=True    
+    
     time.sleep(.9)
     await powerredific()
 
 async def activar_comeToAnomalie():
     global ShieldReparer
+    global Weapons
+    global Shield
+
 
     while True:
+        await EnemyAlert.enemyCheck()
+        poweWeapons= await weaponsComparer.main()
+
+        #Tomar foto del espacio
+        PhotoTaker.ShipCheck()
+
+        
 
         shieldDamage= await capacitorProsessing.procesar_imagen()
         

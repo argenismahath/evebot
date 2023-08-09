@@ -25,6 +25,7 @@ async def redimensionar_imagen(nombre_imagen, nuevo_ancho, nuevo_alto):
 enemy=False
 async  def enemyCheck():
     global enemy
+    # PhotoTaker.enemiesCheck()
     def calcular_similitud_imagenes(imagen1, imagen2, win_size=7):
             # Leer las imágenes y convertirlas a escala de grises
         img1 = io.imread(imagen1)
@@ -39,7 +40,7 @@ async  def enemyCheck():
 
         # PhotoTaker.target()
 
-    PhotoTaker.enemiesCheck()
+    # PhotoTaker.enemiesCheck()
     time.sleep(2)
         # Ejemplo de uso:
     nombre_imagen_original = "EnemiesClear.png"
@@ -54,10 +55,10 @@ async  def enemyCheck():
     print(f"La imagen redimensionada se ha guardado en: {ruta_imagen_redimensionada}")
     print(f"La similitud entre las imágenes es: {similitud}")
     print(enemy)
-    if(similitud<0.99 and enemy==False):
+    if(similitud<0.97 and enemy==False):
         print("ingresar a la estacion XD")
         enemy=True
-        mause.dock()
+        # mause.dock()
         time.sleep(20)
 
     elif(similitud>0.98 and enemy==True):
@@ -76,9 +77,10 @@ async def periodic_enemy_check():
 
 
 # Iniciar el bucle de eventos de asyncio
-loop = asyncio.get_event_loop()
+# loop = asyncio.get_event_loop()
 # Iniciar la función asincrónica que se ejecutará cada 10 segundos
-asyncio.ensure_future(periodic_enemy_check())
+# asyncio.ensure_future(periodic_enemy_check())
 
 # Ejecutar el bucle de eventos para permitir que las tareas asincrónicas se ejecuten
-loop.run_forever()
+# loop.run_forever()
+asyncio.run(enemyCheck())

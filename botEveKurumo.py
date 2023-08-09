@@ -16,6 +16,7 @@ closeWhileII=False
 
 pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
+
 def takePhotografie(number):
     # Toma la captura de pantalla y la guarda como captura.png
     PhotoTaker.takePhoto(number)
@@ -55,6 +56,9 @@ async def checkAnomaliesImage():
 
 async def main():
     global whileCounter
+
+    # mause.unDock()
+
     # Corregir el bucle
     while whileCounter < 6:
         await checkAnomaliesImage() 
@@ -64,6 +68,7 @@ async def main():
 
 async def mi_funcion_asincronica(num):
         # print(PhotoTaker.values[whileCounter])
+        
         mause.moveMause(1192, PhotoTaker.values[num], datos["Salto"])
         time.sleep(10)
         await comeToAnomalie.abegingScanner()
