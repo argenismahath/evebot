@@ -34,7 +34,7 @@ def extraer_texto_de_imagen(nombre_imagen):
     # Obtener el texto (números) de la imagen usando Tesseract OCR
     resultado = pytesseract.image_to_string(Image.fromarray(img_bin), config='--psm 6 outputbase digits')
     
-    print(resultado)
+    print(resultado, "**")
     # Reemplazar letras similares a números
     resultado_corregido = reemplazar_similares(resultado)
     
@@ -44,30 +44,23 @@ def main():
     # Ruta de la imagen de la que quieres extraer el texto
     nombre_imagen = "imagen_modificada.png"
 
-    
-
-    # # Cargar la imagen
-    # imagen = cv2.imread('imagen_modificada.png')
-    # # Puntos de inicio y fin de la línea
-    # x1, y1 = 303, 0
-    # x2, y2 = 303, 100
-
-    # # Color de la línea en formato BGR (azul, verde, rojo)
-    # color = (0, 0, 255)  # Rojo
-
-    # # Grosor de la línea
-    # grosor = 40
-
-    # # Dibujar la línea en la imagen
-    # imagen_con_linea = cv2.line(imagen, (x1, y1), (x2, y2), color, grosor)
-
-    # # Guardar la imagen editada
-    # cv2.imwrite('captura_agrandada.png', imagen_con_linea)
-
-    # Obtener el texto de la imagen y reemplazar letras similares a números
     texto_extraido = extraer_texto_de_imagen(nombre_imagen)
+    texto_extraido = texto_extraido.replace("-", "")
+    texto_extraido = texto_extraido.split()
 
+    # Inicializar la variable result con un valor predeterminado
+    result = [0, 0]
+
+    # Asegurarse de que la lista tenga al menos dos elementos
+    if len(texto_extraido) >= 2:
+        # Verificar si el segundo elemento es None
+        if texto_extraido[1] is None:
+            texto_extraido[1] = '0'  # Cambiamos None por '0'
+    
+            # Actualizar la lista result con los dos primeros elementos
+        result = [int(texto_extraido[0]), int(texto_extraido[1])]
+    
     # Imprimir el resultado
     print("Texto extraído de la imagen:")
-    print(texto_extraido)
-main()
+    print(result)
+    return result

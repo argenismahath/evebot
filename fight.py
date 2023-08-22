@@ -65,11 +65,11 @@ async def startFight():
         await powerShield()
     
     #revisar la imagen tomada
-    probabilitie= await FinishFightReport.main()
+    # probabilitie= await FinishFightReport.main()
 
-    if probabilitie:
-        mause.dock()
-        # break
+    # if probabilitie:
+    #     mause.dock()
+    #     # break
 
         #si visualmente las armas estan apaagadas
         #pero si en las variables esta encendido junto al escudo
@@ -88,7 +88,7 @@ async def activar_comeToAnomalie():
 
 
     while True:
-        await EnemyAlert.enemyCheck()
+        result =await EnemyAlert.enemyCheck()
         poweWeapons= await weaponsComparer.main()
 
         #Tomar foto del espacio

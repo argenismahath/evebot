@@ -4,8 +4,10 @@ import json
 from pytesseract import *
 import PhotoTaker
 import TextProcessing
+import datetime
 import mause
 import time
+import keyboard
 import comeToAnomalie
 import asyncio
 # import EnemyAlert
@@ -29,7 +31,7 @@ with open(ruta_archivo, "r") as archivo:
 
 async def checkAnomaliesImage():
     global whileCounter
-
+    
     print(whileCounter)
     takePhotografie(whileCounter)
     time.sleep(2.5)
@@ -59,10 +61,18 @@ async def main():
 
     # mause.unDock()
 
-    # Corregir el bucle
-    while whileCounter < 6:
-        await checkAnomaliesImage() 
-        print("hace click")
+    result= PhotoTaker.enemiesCheck()
+    if result[0] > 0 or result[1] > 0:
+        print("hay enemigos :,V a las ", datetime.datetime.now())
+    else:
+        mause.unDock()
+        time.sleep(20)
+        # mause.dock()
+        mause.openAnomalieMenu()
+
+        while whileCounter < 6:
+            await checkAnomaliesImage() 
+        #     print("hace click")
 
     # Llamar a la función asincrónica con await
 

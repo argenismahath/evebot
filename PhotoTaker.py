@@ -2,6 +2,7 @@ from PIL import ImageGrab
 import time
 import Fondo
 
+
 values = {1: 0, 2: 72, 3: 144, 4: 216, 5:288, 6:360}
 
 def takePhoto(number):
@@ -128,7 +129,9 @@ def enemiesCheck():
     screenshot = ImageGrab.grab(bbox=(X, Y, X + width, Y + height))
     nombre_archivo = f"Enemies.png"
     screenshot.save(nombre_archivo)
+
     print(f"Captura de pantalla guardada en: {nombre_archivo}")
+    return Fondo.change_BackGround()
 
 def ShipCheck():
     #posicion de la  captura de target
@@ -151,10 +154,10 @@ def ShipCheck():
     print(f"Captura de pantalla guardada en: {nombre_archivo}")
 # takePhoto()
 # # target()
-for _ in range(10):
-    enemiesCheck()
-    Fondo.change_BackGround()
-    time.sleep(10)
+# for _ in range(10):
+#     enemiesCheck()
+#     Fondo.change_BackGround()
+#     time.sleep(10)
 # top=top+72
 # takePhoto()
 # ShipCheck()

@@ -25,4 +25,4 @@ def change_BackGround():
 
     # Guardar la imagen modificada
     cv2.imwrite('imagen_modificada.png', imagen_modificada)
-    EnemyProsessiing.main()
+    return EnemyProsessiing.main()

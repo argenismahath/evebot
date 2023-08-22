@@ -4,6 +4,7 @@ from skimage import io, color
 import mause
 import PhotoTaker
 import keyboard
+import datetime
 import pyautogui
 import time
 import asyncio
@@ -40,33 +41,43 @@ async  def enemyCheck():
 
         # PhotoTaker.target()
 
-    # PhotoTaker.enemiesCheck()
-    time.sleep(2)
-        # Ejemplo de uso:
-    nombre_imagen_original = "EnemiesClear.png"
-    nombre_imagen_comparar = "Enemies.png"
-
-    nuevo_ancho = 800
-    nuevo_alto = 600
-
-    ruta_imagen_redimensionada = await redimensionar_imagen(nombre_imagen_original, nuevo_ancho, nuevo_alto)
-    similitud = calcular_similitud_imagenes(nombre_imagen_original, nombre_imagen_comparar)
-
-    print(f"La imagen redimensionada se ha guardado en: {ruta_imagen_redimensionada}")
-    print(f"La similitud entre las imágenes es: {similitud}")
-    print(enemy)
-    if(similitud<0.97 and enemy==False):
-        print("ingresar a la estacion XD")
+    result= PhotoTaker.enemiesCheck()
+    if result[0] > 0 or result[1] > 0:
+        print("hay enemigos :,V a las ", datetime.datetime.now())
         enemy=True
-        # mause.dock()
+        print("ingresar a la estacion XD")
+        mause.dock()
         time.sleep(20)
-
-    elif(similitud>0.98 and enemy==True):
-        print("salir de la estacion XD")
-        mause.unDock()
+    else:
         enemy=False
-        time.sleep(20)
-    print(similitud>98, enemy==True)
+    return enemy
+    # PhotoTaker.enemiesCheck()
+    # time.sleep(2)
+        # Ejemplo de uso:
+    # nombre_imagen_original = "EnemiesClear.png"
+    # nombre_imagen_comparar = "Enemies.png"
+
+    # nuevo_ancho = 800
+    # nuevo_alto = 600
+
+    # ruta_imagen_redimensionada = await redimensionar_imagen(nombre_imagen_original, nuevo_ancho, nuevo_alto)
+    # similitud = calcular_similitud_imagenes(nombre_imagen_original, nombre_imagen_comparar)
+
+    # print(f"La imagen redimensionada se ha guardado en: {ruta_imagen_redimensionada}")
+    # print(f"La similitud entre las imágenes es: {similitud}")
+    print(enemy)
+    # if(similitud<0.97 and enemy==False):
+    #     print("ingresar a la estacion XD")
+    #     enemy=True
+    #     # mause.dock()
+    #     time.sleep(20)
+
+    # elif(similitud>0.98 and enemy==True):
+    #     print("salir de la estacion XD")
+    #     mause.unDock()
+    #     enemy=False
+    #     time.sleep(20)
+    # print(similitud>98, enemy==True)
 
 counter =0
 
@@ -83,4 +94,4 @@ async def periodic_enemy_check():
 
 # Ejecutar el bucle de eventos para permitir que las tareas asincrónicas se ejecuten
 # loop.run_forever()
-asyncio.run(enemyCheck())
+# asyncio.run(enemyCheck())

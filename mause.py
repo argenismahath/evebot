@@ -52,7 +52,6 @@ def targering(x, y):
     #click
     pyautogui.click(x, y)
 
-
 def dock():
     #mover el mause to open menu
     pyautogui.moveTo(1193, 29, duration=.5)
@@ -82,4 +81,15 @@ def unDock():
     time.sleep(0.1)
     keyboard.release("o")
 
+def openAnomalieMenu():
+    keyboard.press("o")
+    time.sleep(0.1)
+    keyboard.release("o")
+    time.sleep(2)
+    #mover el mause to open menu
+    pyautogui.moveTo(1193, 29, duration=.5)
+    pyautogui.click(1193, 29)
 
+    #mover el mause y dar click a la opcion de base
+    pyautogui.moveTo(1236, 205, duration=.5)
+    pyautogui.click(1236, 205)
