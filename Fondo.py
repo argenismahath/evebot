@@ -25,4 +25,31 @@ def change_BackGround():
 
     # Guardar la imagen modificada
     cv2.imwrite('imagen_modificada.png', imagen_modificada)
-    return EnemyProsessiing.main()
+    data =EnemyProsessiing.main()
+    return data
+
+def change_BackGroundCapacitor():
+    # Cargar la imagen
+    imagen = cv2.imread('Capacitor/Capacito_upgrade.png')
+
+    # Colores específicos que deseas eliminar (en formato BGR)
+    colores_a_eliminar = [(157, 162, 169), (255, 0, 0), (0, 255, 0)]  # Rojo, Azul y Verde
+
+    # Umbral de diferencia de color
+    umbral = 30
+
+    # Crear una máscara para cada color a eliminar y combinarlas
+    mascaras = [cv2.inRange(imagen, np.array(color) - umbral, np.array(color) + umbral) for color in colores_a_eliminar]
+    mascara_combinada = np.logical_or.reduce(mascaras)
+
+    # Invertir la máscara para seleccionar los colores que NO son los colores_a_eliminar
+    mascara_invertida = np.logical_not(mascara_combinada)
+
+    # Crear una imagen donde los colores a eliminar sean reemplazados por blanco
+    imagen_modificada = np.copy(imagen)
+    imagen_modificada[np.where(mascara_combinada)] = 255
+
+    # Guardar la imagen modificada
+    cv2.imwrite('Capacitor/Capacito_upgrade.png', imagen_modificada)
+    # data =EnemyProsessiing.main()
+    # return data

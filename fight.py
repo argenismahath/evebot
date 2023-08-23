@@ -12,6 +12,7 @@ import EnemyAlert
 Shield = False
 Weapons=False
 ShieldReparer=False
+unDock=True
 
 async def powerShield():
     global Shield
@@ -80,49 +81,51 @@ async def startFight():
     
     time.sleep(.9)
     await powerredific()
+    await activar_comeToAnomalie()
 
 async def activar_comeToAnomalie():
     global ShieldReparer
     global Weapons
     global Shield
+    global unDock
 
 
     while True:
+        # se estará monitoriando los enemigos en el sistema
         result =await EnemyAlert.enemyCheck()
-        poweWeapons= await weaponsComparer.main()
+        if result:
+            unDock=False
+            time.sleep(20)
 
-        #Tomar foto del espacio
-        PhotoTaker.ShipCheck()
-
-        
-
-        shieldDamage= await capacitorProsessing.procesar_imagen()
-        
-        if shieldDamage is not None:
-            shieldDamage=shieldDamage
         else:
-            shieldDamage=100
-        
-        if ShieldReparer and shieldDamage<70:
-            ShieldReparer=True 
-        elif shieldDamage<70 and ShieldReparer == False:
-            ShieldReparer=True
-            await powerShieldReparer()
-        elif shieldDamage>80 and ShieldReparer:
-            ShieldReparer=False
-            await powerShieldReparer()
 
-        # Usar await para obtener el valor real de la similitud
-        next= await comeToAnomalie.abegingScannerFight()
-        print("********************")
-        print(next)
-        print(ShieldReparer)
-        print(shieldDamage)
-        print("********************")
+            poweWeapons= await weaponsComparer.main()
 
-        if next:
-            await startFight()
-            print("activar armas")
-        await asyncio.sleep(6)
+            #Tomar foto del espacio
+            PhotoTaker.ShipCheck()
+
+            
+
+            shieldDamage= await capacitorProsessing.procesar_imagen()
+            
+            if shieldDamage and ShieldReparer==False:
+                ShieldReparer=True 
+                await powerShieldReparer()
+            elif shieldDamage==False and ShieldReparer:
+                ShieldReparer=False 
+                await powerShieldReparer()
+                
+            # Usar await para obtener el valor real de la similitud
+            next= comeToAnomalie.abegingScannerFight()
+            # print("********************")
+            # print(next)
+            # print(ShieldReparer)
+            # print(shieldDamage)
+            # print("********************")
+
+            if next:
+                await startFight()
+                print("activar armas")
+            await asyncio.sleep(5)
 
     

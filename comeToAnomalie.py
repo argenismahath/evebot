@@ -1,8 +1,8 @@
-import asyncio
+import time
 import PhotoTaker
 import imageComparer
 
-async def escanear():
+def escanear():
         # Toma captura del escáner
         PhotoTaker.target()
 
@@ -14,20 +14,18 @@ async def escanear():
         intervalo = 5
 
         # Esperar durante el intervalo de tiempo antes de llamar a la función nuevamente
-        await asyncio.sleep(intervalo)
+        time.sleep(intervalo)
         return similitud
 
-async def abegingScanner():
+def abegingScanner():
     for _ in range(10):
-        similitud = await escanear()
-        print(similitud)
-        print("similitud*********")
+        similitud = escanear()
 
         if similitud:
             return similitud
 
-async def abegingScannerFight():
-    similitud = await escanear()
+def abegingScannerFight():
+    similitud = escanear()
     print(similitud)
     print("similitud*********")
 

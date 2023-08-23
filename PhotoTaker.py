@@ -1,6 +1,7 @@
 from PIL import ImageGrab
 import time
 import Fondo
+import impoveImgCapacitor
 
 
 values = {1: 0, 2: 72, 3: 144, 4: 216, 5:288, 6:360}
@@ -24,8 +25,6 @@ def takePhoto(number):
     # Guardar la captura de pantalla en un archivo
     nombre_archivo = "captura.png"
     screenshot.save(nombre_archivo)
-
-
 
     # Mostrar la ruta del archivo donde se guardó la captura de pantalla
     print(f"Captura de pantalla guardada en: {nombre_archivo}")
@@ -89,12 +88,12 @@ def Capacitor():
     #posicion de la  captura de target
     #Shiel damage data
     # X,Y=570, 680
-    X,Y=570, 695
+    X,Y=567, 684
 
         
     # Ancho y alto del área a capturar
-    width = 50
-    height = 30
+    width = 60
+    height = 50
 
     # Captura de pantalla del área específica
     screenshot = ImageGrab.grab(bbox=(X, Y, X + width, Y + height))
@@ -102,6 +101,7 @@ def Capacitor():
     # Guardar la captura de pantalla en un archivo
     nombre_archivo = f"Capacitor/Capacitor.png"
     screenshot.save(nombre_archivo)
+    impoveImgCapacitor.improveImgCapacitor()
 
     print(f"Captura de pantalla guardada en: {nombre_archivo}")
 

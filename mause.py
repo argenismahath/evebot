@@ -22,7 +22,7 @@ def moveMause(left, top, distance):
     # pyautogui.click(nueva_x-180, nueva_y+100)
 
     #impulsar
-    pyautogui.dragTo(nueva_x-325, nueva_y+100, duration=1.0)
+    pyautogui.dragTo(nueva_x-210, nueva_y+100, duration=1.0)
 
     #320 = 19
     #325 = 22km
@@ -53,6 +53,13 @@ def targering(x, y):
     pyautogui.click(x, y)
 
 def dock():
+    # abre el menu
+    print("abre el menu")
+    keyboard.press("o")
+    time.sleep(0.1)
+    keyboard.release("o")
+    time.sleep(3)
+
     #mover el mause to open menu
     pyautogui.moveTo(1193, 29, duration=.5)
     pyautogui.click(1193, 29)
@@ -93,3 +100,4 @@ def openAnomalieMenu():
     #mover el mause y dar click a la opcion de base
     pyautogui.moveTo(1236, 205, duration=.5)
     pyautogui.click(1236, 205)
+    time.sleep(2)
