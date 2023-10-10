@@ -84,4 +84,4 @@ async def main():
         return False
     
 # Ejecutar el código asincrónico
-# asyncio.run(main())
+asyncio.run(main())
